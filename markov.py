@@ -57,21 +57,25 @@ def make_chains(text_string):
     return chains
 
 
-print(make_chains(open_and_read_file("green-eggs.txt")))
-
 
 def make_text(chains):
     """Return text from chains."""
 
-    words = []
-    #print(chains.keys())
+    link_key = random.choice(list(chains.keys()))
+
+    words = [link_key[0]]
     
-    #find number of keys
-    #choose random integer <= number of keys
-    #random.randint(0, len(keys))
+    while True:
+        random_value = random.choice(chains[link_key])
+        new_key = (link_key[1], random_value)
+        if new_key not in chains:
+            break
+        else:
+            link_key = new_key
+        words.append(new_key[0])
+        
 
     return ' '.join(words)
-
 
 
 
@@ -86,4 +90,4 @@ chains = make_chains(input_text)
 # Produce random text
 random_text = make_text(chains)
 
-#print(random_text)
+print(random_text)
